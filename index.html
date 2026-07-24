@@ -286,6 +286,21 @@
   footer{ padding: 52px 0 64px; text-align:center; border-top:1px solid var(--border); }
   footer .end{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
   footer .heart{ color:var(--accent); }
+
+  .github-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:6px;
+  font-size:16px;      /* 기존보다 작게 */
+  color:var(--accent);
+  text-decoration:none;
+  transition:transform .15s ease;
+}
+
+.github-icon:hover{
+  transform:translateY(-1px);
+}
 </style>
 </head>
 <body>
@@ -306,7 +321,7 @@
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="bar"></span><span>BACKEND DEVELOPER</span></div>
-      <h1 class="name">박종범</h1>
+      <h1 class="name">박종범</h1><
       <div class="subid">JONG BEOM / PARK &nbsp;/&nbsp; GITHUB_ID : bumjpark</div>
 
       <div class="divider"></div>
@@ -369,9 +384,8 @@
 
     <div class="service-card">
       <div class="service-head">
-        <div class="service-title"><span class="status-dot"></span><h3>MY InsideOut<a class="github-icon"
-           href="https://github.com/bumjpark/프로젝트" target="_blank"> ↗
-        </a></h3></div>
+        <div class="service-title"><span class="status-dot"></span><h3>MY InsideOut
+          <a class="github-icon" href="https://github.com/bumjpark/프로젝트" target="_blank"aria-label="GitHub">↗</a></h3></div>
         <div class="service-period">2024.12 — 2025.01</div>
       </div>
       <div class="tags">
