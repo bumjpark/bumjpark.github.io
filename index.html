@@ -219,8 +219,22 @@
   .cert-item .cert-icon{ font-family:var(--mono); color:var(--ok); font-size:13px; }
 
   /* ---------- BLOG ---------- */
-  .blog-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
+  .blog-carousel{
+    overflow:hidden; position:relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+  .blog-track{
+    display:flex; gap:16px; width:max-content;
+    animation: blog-scroll 60s linear infinite;
+  }
+  .blog-carousel:hover .blog-track{ animation-play-state: paused; }
+  @keyframes blog-scroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
   .blog-card{
+    flex:0 0 260px;
     display:flex; flex-direction:column; gap:10px;
     background:var(--surface); border:1px solid var(--border);
     border-radius:12px; padding:22px 24px; text-decoration:none; color:inherit;
@@ -237,13 +251,13 @@
     display:flex; align-items:center; justify-content:center; gap:8px;
     font-family:var(--mono); font-size:13px; font-weight:600; color:var(--text);
     border:1.5px dashed var(--accent-line); border-radius:9px;
-    padding:16px; margin-top:16px; text-decoration:none;
+    padding:16px; margin-top:22px; text-decoration:none;
     transition: background .15s ease, border-color .15s ease;
   }
   .blog-more:hover{ background:var(--accent-soft); border-color:var(--accent); }
 
   @media (max-width:820px){
-    .blog-grid{ grid-template-columns:1fr; }
+    .blog-card{ flex-basis:220px; }
   }
 
   /* ---------- ABOUT ---------- */
@@ -286,21 +300,6 @@
   footer{ padding: 52px 0 64px; text-align:center; border-top:1px solid var(--border); }
   footer .end{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
   footer .heart{ color:var(--accent); }
-
-  .github-icon{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  margin-left:6px;
-  font-size:16px;      /* 기존보다 작게 */
-  color:var(--accent);
-  text-decoration:none;
-  transition:transform .15s ease;
-}
-
-.github-icon:hover{
-  transform:translateY(-1px);
-}
 </style>
 </head>
 <body>
@@ -321,7 +320,7 @@
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="bar"></span><span>BACKEND DEVELOPER</span></div>
-      <h1 class="name">박종범</h1><
+      <h1 class="name">박종범</h1>
       <div class="subid">JONG BEOM / PARK &nbsp;/&nbsp; GITHUB_ID : bumjpark</div>
 
       <div class="divider"></div>
@@ -384,8 +383,7 @@
 
     <div class="service-card">
       <div class="service-head">
-        <div class="service-title"><span class="status-dot"></span><h3>MY InsideOut
-          <a class="github-icon" href="https://github.com/2024-Winter-Bootcamp-TeamC" target="_blank"aria-label="GitHub"> 프로젝트 바로가기↗</a></h3></div>
+        <div class="service-title"><span class="status-dot"></span><h3>MY InsideOut</h3></div>
         <div class="service-period">2024.12 — 2025.01</div>
       </div>
       <div class="tags">
@@ -415,6 +413,7 @@
           <summary>CI 구축</summary>
           <ul class="log">
             <li>GitHub Actions 기반 자동 테스트 파이프라인 구축</li>
+            <li>Pull Request 단계에서 테스트 자동화 및 결과 피드백 제공</li>
           </ul>
         </details>
       </div>
@@ -422,8 +421,7 @@
 
     <div class="service-card">
       <div class="service-head">
-        <div class="service-title"><span class="status-dot"></span><h3>StackNote
-        <a class="github-icon" href="https://github.com/bumjpark/StackNote" target="_blank"aria-label="GitHub"> 프로젝트 바로가기↗</a></h3></div>
+        <div class="service-title"><span class="status-dot"></span><h3>StackNote</h3></div>
         <div class="service-period">2026.01 — 2026.03</div>
       </div>
       <div class="tags"><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">MySQL</span></div>
@@ -481,37 +479,70 @@
       <span class="comment">// studymyrecord.tistory.com</span>
     </div>
 
-    <div class="blog-grid">
-      <a class="blog-card" href="https://studymyrecord.tistory.com/46" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.07.17</span><span class="blog-card-arrow">↗</span></div>
-        <h3>스프링 부트 핵심 개념 총정리: 웹 동작 구조부터 레이어드 아키텍처, 디자인 패턴, REST API까지</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Spring</span><span class="blog-cat">Java</span></div>
-      </a>
-      <a class="blog-card" href="https://studymyrecord.tistory.com/45" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.07.10</span><span class="blog-card-arrow">↗</span></div>
-        <h3>Java Reflection 부터 Spring Framework 동작 원리</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Java</span><span class="blog-cat">Spring</span></div>
-      </a>
-      <a class="blog-card" href="https://studymyrecord.tistory.com/44" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.07.02</span><span class="blog-card-arrow">↗</span></div>
-        <h3>[데이터베이스] DML, TCL, Window 함수</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
-      </a>
-      <a class="blog-card" href="https://studymyrecord.tistory.com/43" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.06.24</span><span class="blog-card-arrow">↗</span></div>
-        <h3>[데이터베이스] 서브쿼리</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
-      </a>
-      <a class="blog-card" href="https://studymyrecord.tistory.com/42" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.06.21</span><span class="blog-card-arrow">↗</span></div>
-        <h3>[데이터베이스] GROUP BY, JOIN</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
-      </a>
-      <a class="blog-card" href="https://studymyrecord.tistory.com/41" target="_blank" rel="noopener">
-        <div class="blog-card-top"><span class="blog-card-date">2026.06.15</span><span class="blog-card-arrow">↗</span></div>
-        <h3>[데이터베이스] SQL 핵심 노트</h3>
-        <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
-      </a>
+    <div class="blog-carousel">
+      <div class="blog-track">
+        <a class="blog-card" href="https://studymyrecord.tistory.com/46" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.17</span><span class="blog-card-arrow">↗</span></div>
+          <h3>스프링 부트 핵심 개념 총정리: 웹 동작 구조부터 레이어드 아키텍처, 디자인 패턴, REST API까지</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Spring</span><span class="blog-cat">Java</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/45" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.10</span><span class="blog-card-arrow">↗</span></div>
+          <h3>Java Reflection 부터 Spring Framework 동작 원리</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Java</span><span class="blog-cat">Spring</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/44" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.02</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] DML, TCL, Window 함수</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/43" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.24</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] 서브쿼리</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/42" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.21</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] GROUP BY, JOIN</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/41" target="_blank" rel="noopener">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.15</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] SQL 핵심 노트</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <!-- 무한 루프를 위한 복제본 (aria-hidden 처리) -->
+        <a class="blog-card" href="https://studymyrecord.tistory.com/46" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.17</span><span class="blog-card-arrow">↗</span></div>
+          <h3>스프링 부트 핵심 개념 총정리: 웹 동작 구조부터 레이어드 아키텍처, 디자인 패턴, REST API까지</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Spring</span><span class="blog-cat">Java</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/45" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.10</span><span class="blog-card-arrow">↗</span></div>
+          <h3>Java Reflection 부터 Spring Framework 동작 원리</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Java</span><span class="blog-cat">Spring</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/44" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.07.02</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] DML, TCL, Window 함수</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/43" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.24</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] 서브쿼리</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/42" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.21</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] GROUP BY, JOIN</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+        <a class="blog-card" href="https://studymyrecord.tistory.com/41" target="_blank" rel="noopener" aria-hidden="true">
+          <div class="blog-card-top"><span class="blog-card-date">2026.06.15</span><span class="blog-card-arrow">↗</span></div>
+          <h3>[데이터베이스] SQL 핵심 노트</h3>
+          <div class="blog-card-cats"><span class="blog-cat">Database</span><span class="blog-cat">SQL</span></div>
+        </a>
+      </div>
     </div>
 
     <a class="blog-more" href="https://studymyrecord.tistory.com" target="_blank" rel="noopener">블로그 전체 글 보러가기 ↗</a>
